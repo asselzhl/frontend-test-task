@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { EntityItem } from "./components/EntityItem/EntityItem";
 
 function App() {
   return (
     <>
-      <h1 className="text-[#ff00ff]">test</h1>
+      <EntityItem />
     </>
   );
 }
