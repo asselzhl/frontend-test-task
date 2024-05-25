@@ -5,6 +5,12 @@ export const store = configureStore({
     reducer: {
         entity: entityReducer
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['fetchEntities/fulfilled', 'fetchEntities/rejected'],
+            },
+        }),
 })
 
 

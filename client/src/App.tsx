@@ -1,9 +1,9 @@
-import { EntityItem } from "./components/EntityItem/EntityItem";
+import { EntityList } from "./components/EntityList/EntityList";
 
 function App() {
   return (
     <>
-      <EntityItem />
+      <EntityList />
     </>
   );
 }
