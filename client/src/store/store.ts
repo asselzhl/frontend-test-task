@@ -8,7 +8,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
-                ignoredActions: ['fetchEntities/fulfilled', 'fetchEntities/rejected'],
+                ignoredActions: ['fetchEntities/fulfilled', 'fetchEntities/rejected', 'deleteEntity/fulfilled', 'deleteEntity/rejected'],
             },
         }),
 })

@@ -46,6 +46,12 @@ app.put("/entities/:id", (req, res) => {
 
 app.delete("/entities/:id", (req, res) => {
   const entityId = parseInt(req.params.id, 10);
-  entities = entities.filter((e) => e.id !== entityId);
-  res.status(204).send();
+  const entityIndex = entities.findIndex((e) => e.id === entityId);
+
+  if (entityIndex !== -1) {
+    const deletedEntity = entities.splice(entityIndex, 1)[0];
+    res.status(200).json(deletedEntity);
+  } else {
+    res.status(404).json({ message: "Entity not found" });
+  }
 });

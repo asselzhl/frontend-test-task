@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchEntities } from "./entityThunk";
+import { deleteEntity, fetchEntities } from "./entityThunk";
 import { handlePending, handleRejected } from "../reducersUtils";
 import { StateStatus, stateStatuses } from "../constants";
 
@@ -33,7 +33,16 @@ export const entitySlice = createSlice({
                 state.data = action.payload.data;
                 return state;
             })
-            .addCase(fetchEntities.rejected, handleRejected);
+            .addCase(fetchEntities.rejected, handleRejected)
+            .addCase(deleteEntity.pending, handlePending)
+            .addCase(deleteEntity.fulfilled, (state, action) => {
+                state.status = stateStatuses.succeeded;
+                state.data = state.data.filter(
+                    (entity) => entity.id !== action.payload.data.id
+                );
+                return state;
+            })
+            .addCase(deleteEntity.rejected, handleRejected);
     }
 });
 

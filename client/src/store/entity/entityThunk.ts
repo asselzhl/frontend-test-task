@@ -13,3 +13,12 @@ export const fetchEntities = createAsyncThunk('fetchEntities', async (_, thunkAp
         return thunkApi.rejectWithValue(error);
     }
 });
+
+export const deleteEntity = createAsyncThunk('deleteEntity', async (id: number, thunkApi) => {
+    try {
+        const data = await agent.delete(`/entities/${id}`);
+        return data;
+    } catch (error) {
+        return thunkApi.rejectWithValue(error);
+    }
+});
