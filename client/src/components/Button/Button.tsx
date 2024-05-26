@@ -1,7 +1,7 @@
 import React from "react";
 
 const style = {
-  pageButton: `uppercase bg-[#999] text-white rounded py-[13px] px-9 hover:opacity-80 duration-300`,
+  pageButton: `uppercase bg-[#000] text-white rounded py-[13px] px-9 hover:opacity-80 duration-300`,
 };
 
 type ButtonType = "submit" | "reset" | "button";
