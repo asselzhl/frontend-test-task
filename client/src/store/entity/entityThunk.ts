@@ -3,7 +3,7 @@ import axios from 'axios';
 
 interface NewEntityState {
     name: string;
-    coordinate: number[];
+    coordinate: string[];
     labels: string[];
 }
 

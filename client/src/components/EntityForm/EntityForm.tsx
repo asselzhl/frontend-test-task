@@ -4,7 +4,10 @@ import { Button } from "../Button/Button";
 import { NewEntityLabels } from "../NewEntityLabels/NewEntityLabels";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { setNewEntityData } from "../../store/newEntity/newEntitySlice";
+import {
+  clearNewEntityData,
+  setNewEntityData,
+} from "../../store/newEntity/newEntitySlice";
 import { getNewEntityState } from "../../store/selectors";
 import { createEntity } from "../../store/entity/entityThunk";
 
@@ -33,6 +36,7 @@ export const EntityForm = () => {
     };
 
     dispatch(createEntity(newEntityData));
+    dispatch(clearNewEntityData());
   };
   return (
     <div className={style.wrapper}>

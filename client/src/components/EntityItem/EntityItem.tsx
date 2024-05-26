@@ -5,7 +5,7 @@ import { AppDispatch } from "../../store/store";
 import { deleteEntity } from "../../store/entity/entityThunk";
 
 const style = {
-  listItem: `flex items-center justify-between`,
+  listItem: `flex items-center justify-between text-center`,
   buttons: `flex gap-x-5`,
 };
 
@@ -28,8 +28,8 @@ export const EntityItem = ({ entity }: EntityItemProps) => {
   return (
     <li className={style.listItem}>
       <span>{entity.name}</span>
-      <span>{entity.coordinate}</span>
-      <span>{entity.labels}</span>
+      <span>{entity.coordinate.join(", ")}</span>
+      <span>{entity.labels.join(", ")}</span>
       <div className={style.buttons}>
         <Button text="edit" onClick={() => {}} />
         <Button text="delete" onClick={handleDeleteButton} />

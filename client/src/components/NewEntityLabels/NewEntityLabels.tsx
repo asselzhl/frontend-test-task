@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormFieldWithLabel } from "../FormField/FormFieldWithLabel";
 import { Button } from "../Button/Button";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "src/store/store";
+import { setNewEntityLabels } from "../../store/newEntity/newEntitySlice";
 
 const style = {
   form: `flex items-end gap-x-2`,
@@ -8,10 +11,28 @@ const style = {
 };
 
 export const NewEntityLabels = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const [label, setLabel] = useState("");
+
+  const handleChange = (e) => {
+    setLabel(e.target.value);
+  };
+
+  const handleButtonClick = () => {
+    dispatch(setNewEntityLabels(label));
+    setLabel("");
+  };
+
   return (
     <div className={style.form}>
-      <FormFieldWithLabel name="labels" value="" onChange={() => {}} />
-      <button className={style.button}>+</button>
+      <FormFieldWithLabel name="labels" value={label} onChange={handleChange} />
+      <button
+        className={style.button}
+        type="button"
+        onClick={handleButtonClick}
+      >
+        +
+      </button>
     </div>
   );
 };
