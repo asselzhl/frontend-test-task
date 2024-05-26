@@ -1,9 +1,9 @@
-import { EntityList } from "./components/EntityList/EntityList";
+import { EntityManager } from "./components/EntityManager/EntityManager";
 
 function App() {
   return (
     <>
-      <EntityList />
+      <EntityManager />
     </>
   );
 }
