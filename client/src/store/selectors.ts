@@ -10,3 +10,5 @@ export const getEntityStateStatus = (state: RootState) => state.entity.status;
 
 // New entity selectors
 export const getNewEntityState = (state: RootState) => state.newEntity;
+
+export const getNewEntityLabels = (state: RootState) => state.newEntity.labels;

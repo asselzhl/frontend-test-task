@@ -5,7 +5,7 @@ import { AppDispatch } from "../../store/store";
 import { deleteEntity } from "../../store/entity/entityThunk";
 
 const style = {
-  listItem: `flex items-center justify-between text-center`,
+  listItem: `flex items-center justify-between`,
   buttons: `flex gap-x-5`,
 };
 
@@ -22,17 +22,23 @@ interface EntityItemProps {
 export const EntityItem = ({ entity }: EntityItemProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleDeleteButton = () => {
+  const handleEdit = () => {
+    console.log(entity.id);
+  };
+
+  const handleDelete = () => {
     dispatch(deleteEntity(entity.id));
   };
   return (
     <li className={style.listItem}>
-      <span>{entity.name}</span>
-      <span>{entity.coordinate.join(", ")}</span>
-      <span>{entity.labels.join(", ")}</span>
+      <div className="flex w-full">
+        <span className="flex-1">{entity.name}</span>
+        <span className="flex-1">{entity.coordinate.join(", ")}</span>
+        <span className="flex-1">{entity.labels.join(", ")}</span>
+      </div>
       <div className={style.buttons}>
-        <Button text="edit" onClick={() => {}} />
-        <Button text="delete" onClick={handleDeleteButton} />
+        <Button text="edit" onClick={handleEdit} />
+        <Button text="delete" onClick={handleDelete} />
       </div>
     </li>
   );

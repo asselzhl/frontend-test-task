@@ -21,8 +21,13 @@ export const newEntitySlice = createSlice({
         setNewEntityData: (state, action) => {
             return { ...state, ...action.payload };
         },
-        setNewEntityLabels: (state, action) => {
+        addNewEntityLabel: (state, action) => {
             state.labels.push(action.payload);
+            return state;
+        },
+        removeNewEntityLabel: (state, action) => {
+            state.labels = state.labels.filter((label) => label !== action.payload);
+            return state;
         },
         clearNewEntityData: (state) => {
             state = initialState;
@@ -34,4 +39,4 @@ export const newEntitySlice = createSlice({
 
 export const newEntityReducer = newEntitySlice.reducer
 
-export const { setNewEntityData, setNewEntityLabels, clearNewEntityData } = newEntitySlice.actions
+export const { setNewEntityData, addNewEntityLabel, clearNewEntityData, removeNewEntityLabel } = newEntitySlice.actions

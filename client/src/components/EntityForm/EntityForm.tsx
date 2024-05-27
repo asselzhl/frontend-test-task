@@ -14,7 +14,7 @@ import { createEntity } from "../../store/entity/entityThunk";
 const style = {
   wrapper: `w-full`,
   title: `text-center mb-7 text-2xl font-bold`,
-  from: `flex gap-6 items-end justify-center flex-wrap`,
+  from: `flex gap-6 items-center justify-center flex-wrap`,
 };
 
 export const EntityForm = () => {
