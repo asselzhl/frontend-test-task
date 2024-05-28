@@ -9,7 +9,7 @@ const style = {
 export const EntityManager = () => {
   return (
     <div className={style.wrapper}>
-      <EntityForm />
+      <EntityForm type="create" />
       <EntityList />
     </div>
   );

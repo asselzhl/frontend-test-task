@@ -2,8 +2,8 @@ import React from "react";
 import { formFieldsMap } from "./formFieldsMap";
 
 const style = {
-  pageInput: `py-3 px-4 leading-6 rounded border border-[#CFCFCF] focus:outline-[#007298] w-full`,
-  label: `font-bold`,
+  pageInput: `py-3 px-4 leading-6 rounded border border-[#CFCFCF] focus:outline-[#007298] flex flex-col`,
+  label: `font-bold flex flex-col`,
 };
 
 interface FormFieldWithLabelProps {

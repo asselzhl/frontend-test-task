@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { v4 as v4 } from "uuid";
 
 const app = express();
 
@@ -14,13 +15,23 @@ app.listen(port, () => {
 
 let entities = [
   {
-    id: 1,
+    id: v4(),
     name: "Entity1",
     coordinate: [-5, 10],
     labels: ["labelA", "labelB", "labelE"],
   },
-  { id: 2, name: "Entity2", coordinate: [3, 6], labels: ["labelC", "labelD"] },
-  { id: 3, name: "Entity3", coordinate: [4, -1], labels: ["labelA", "labelC"] },
+  {
+    id: v4(),
+    name: "Entity2",
+    coordinate: [3, 6],
+    labels: ["labelC", "labelD"],
+  },
+  {
+    id: v4(),
+    name: "Entity3",
+    coordinate: [4, -1],
+    labels: ["labelA", "labelC"],
+  },
 ];
 
 app.get("/entities", (req, res) => {
@@ -28,13 +39,13 @@ app.get("/entities", (req, res) => {
 });
 
 app.post("/entities", (req, res) => {
-  const newEntity = { id: Date.now(), ...req.body };
+  const newEntity = { id: v4(), ...req.body };
   entities.push(newEntity);
   res.status(201).json(newEntity);
 });
 
 app.put("/entities/:id", (req, res) => {
-  const entityId = parseInt(req.params.id, 10);
+  const entityId = req.params.id;
   const index = entities.findIndex((e) => e.id === entityId);
   if (index !== -1) {
     entities[index] = { ...entities[index], ...req.body };

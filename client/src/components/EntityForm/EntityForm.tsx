@@ -1,60 +1,109 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormFieldWithLabel } from "../FormField/FormFieldWithLabel";
 import { Button } from "../Button/Button";
-import { NewEntityLabels } from "../NewEntityLabels/NewEntityLabels";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
+
 import {
-  clearNewEntityData,
-  setNewEntityData,
-} from "../../store/newEntity/newEntitySlice";
-import { getNewEntityState } from "../../store/selectors";
-import { createEntity } from "../../store/entity/entityThunk";
+  getCreateEntityFormState,
+  getEditEntityFormState,
+} from "../../store/selectors";
+import { createEntity, updateEntity } from "../../store/entity/entityThunk";
+import {
+  setCreateEntityFormData,
+  setEditEntityFormData,
+  clearCreateEntityFormData,
+  clearEditEntityFormData,
+} from "../../store/entityForm/entityForm";
+import { EntityFormLabels } from "../EntityFormLabels/EntityFormLabels";
 
 const style = {
   wrapper: `w-full`,
   title: `text-center mb-7 text-2xl font-bold`,
-  from: `flex gap-6 items-center justify-center flex-wrap`,
+  from: `flex gap-6 items-start justify-center flex-wrap`,
 };
 
-export const EntityForm = () => {
+type EntityFormTypes = "edit" | "create";
+
+interface EntityFormProps {
+  type: EntityFormTypes;
+  entity;
+  setIsEditing?;
+}
+
+export const EntityForm = ({
+  type = "create",
+  entity = null,
+  setIsEditing,
+}: EntityFormProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const fields = ["name", "coordinate1", "coordinate2"];
 
-  const newEntityState = useSelector(getNewEntityState);
+  const entityFormState = useSelector(
+    type === "create" ? getCreateEntityFormState : getEditEntityFormState
+  );
+
+  useEffect(() => {
+    if (entity && type === "edit") {
+      const initialFormData = {
+        name: entity.name,
+        coordinate1: entity.coordinate[0],
+        coordinate2: entity.coordinate[1],
+        labels: entity.labels,
+      };
+      dispatch(setEditEntityFormData(initialFormData));
+    }
+  }, [entity, type, dispatch]);
 
   const handleFormInputsChange = (e) => {
-    dispatch(setNewEntityData({ [e.target.name]: e.target.value }));
+    const action =
+      type === "create" ? setCreateEntityFormData : setEditEntityFormData;
+    dispatch(action({ [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newEntityData = {
-      name: newEntityState.name,
-      coordinate: [newEntityState.coordinate1, newEntityState.coordinate2],
-      labels: newEntityState.labels,
+    const entityFormData = {
+      name: entityFormState.name,
+      coordinate: [entityFormState.coordinate1, entityFormState.coordinate2],
+      labels: entityFormState.labels,
     };
 
-    dispatch(createEntity(newEntityData));
-    dispatch(clearNewEntityData());
+    if (type === "create") {
+      dispatch(createEntity(entityFormData));
+    } else {
+      const updatedEntity = {
+        entityFormData: entityFormData,
+        id: entity.id,
+      };
+      dispatch(updateEntity(updatedEntity));
+      setIsEditing(false);
+    }
   };
   return (
     <div className={style.wrapper}>
-      <h1 className={style.title}>Create Entity</h1>
+      <h1 className={style.title}>
+        {type === "create" ? "Create Entity" : "Edit Entity"}
+      </h1>
       <form className={style.from} onSubmit={handleSubmit}>
         {fields.map((field) => {
           return (
             <FormFieldWithLabel
               key={field}
               name={field}
-              value={newEntityState[field]}
+              value={entityFormState[field]}
               onChange={handleFormInputsChange}
             />
           );
         })}
 
-        <NewEntityLabels />
-        <Button text="create entity" type="submit" onClick={() => {}} />
+        <EntityFormLabels type={type} />
+        <Button
+          text={type === "create" ? "create entity" : "save"}
+          type="submit"
+          onClick={() => {}}
+        />
       </form>
     </div>
   );

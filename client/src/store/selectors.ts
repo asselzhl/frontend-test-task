@@ -8,7 +8,10 @@ export const getEntityList = (state: RootState) => state.entity.data;
 
 export const getEntityStateStatus = (state: RootState) => state.entity.status;
 
-// New entity selectors
-export const getNewEntityState = (state: RootState) => state.newEntity;
+// Entity form selectors
+export const getCreateEntityFormState = (state: RootState) => state.entityForm.createEntityForm;
+export const getCreateEntityFormLabels = (state: RootState) => state.entityForm.createEntityForm.labels;
 
-export const getNewEntityLabels = (state: RootState) => state.newEntity.labels;
+
+export const getEditEntityFormState = (state: RootState) => state.entityForm.editEntityForm;
+export const getEditEntityFormLabels = (state: RootState) => state.entityForm.editEntityForm.labels;

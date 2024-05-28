@@ -3,32 +3,42 @@ import { FormFieldWithLabel } from "../FormField/FormFieldWithLabel";
 import { Button } from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "src/store/store";
-import { addNewEntityLabel } from "../../store/newEntity/newEntitySlice";
 import { LabelsItem } from "../LabelsItem/LabelsItem";
-import { getNewEntityLabels } from "../../store/selectors";
+import {
+  getEditEntityFormLabels,
+  getCreateEntityFormLabels,
+} from "../../store/selectors";
+import {
+  addCreateEntityFormLabel,
+  addEditEntityFormLabel,
+} from "../../store/entityForm/entityForm";
 
 const style = {
-  form: `flex items-end gap-x-2 mb-7`,
+  form: `flex items-end gap-x-2 `,
   button: `bg-[#999] text-white rounded py-[13px] px-6 hover:opacity-80 duration-300`,
 };
 
-export const NewEntityLabels = () => {
+export const EntityFormLabels = ({ type }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [label, setLabel] = useState("");
 
-  const entityLabels = useSelector(getNewEntityLabels);
+  const entityLabels = useSelector(
+    type === "create" ? getCreateEntityFormLabels : getEditEntityFormLabels
+  );
 
   const handleChange = (e) => {
     setLabel(e.target.value);
   };
 
   const handleButtonClick = () => {
-    dispatch(addNewEntityLabel(label));
+    const action =
+      type === "create" ? addCreateEntityFormLabel : addEditEntityFormLabel;
+    dispatch(action(label));
     setLabel("");
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-y-4">
       <div className={style.form}>
         <FormFieldWithLabel
           name="labels"
@@ -44,11 +54,13 @@ export const NewEntityLabels = () => {
         </button>
       </div>
 
-      <ul>
-        {entityLabels.map((label) => {
-          return <LabelsItem label={label} />;
-        })}
-      </ul>
+      {entityLabels.length ? (
+        <ul>
+          {entityLabels.map((label) => {
+            return <LabelsItem key={label} type={type} label={label} />;
+          })}
+        </ul>
+      ) : null}
     </div>
   );
 };

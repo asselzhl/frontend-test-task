@@ -1,10 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-interface NewEntityState {
+interface EntityFormState {
     name: string;
     coordinate: string[];
     labels: string[];
+}
+
+interface UpdatedEntity {
+    id: string;
+    entityFormData: EntityFormState;
 }
 
 const agent = axios.create({
@@ -20,7 +25,7 @@ export const fetchEntities = createAsyncThunk('fetchEntities', async (_, thunkAp
     }
 });
 
-export const createEntity = createAsyncThunk('createEntity', async (newEntity: NewEntityState, thunkApi) => {
+export const createEntity = createAsyncThunk('createEntity', async (newEntity: EntityFormState, thunkApi) => {
     try {
         const data = await agent.post('/entities', newEntity);
         return data;
@@ -37,3 +42,12 @@ export const deleteEntity = createAsyncThunk('deleteEntity', async (id: number, 
         return thunkApi.rejectWithValue(error);
     }
 });
+
+export const updateEntity = createAsyncThunk('updateEntity', async (updatedEntity: UpdatedEntity, thunkApi) => {
+    try {
+        const data = await agent.put(`/entities/${updatedEntity.id}`, updatedEntity.entityFormData);
+        return data;
+    } catch (error) {
+        return thunkApi.rejectWithValue(error);
+    }
+})
