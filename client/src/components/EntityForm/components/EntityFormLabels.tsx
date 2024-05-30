@@ -17,7 +17,12 @@ const style = {
   button: `bg-[#999] text-white rounded py-[13px] px-6 hover:opacity-80 duration-300`,
 };
 
-export const EntityFormLabels = ({ type }) => {
+type EntityFormType = "edit" | "create";
+interface EntityFormLabelsProps {
+  type: EntityFormType;
+}
+
+export const EntityFormLabels = ({ type }: EntityFormLabelsProps) => {
   const dispatch = useAppDispatch();
   const [label, setLabel] = useState("");
 

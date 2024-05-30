@@ -12,9 +12,10 @@ const style = {
   labelName: `py-3 px-4 leading-6 rounded border border-[#000] w-full`,
 };
 
+type EntityFormType = "edit" | "create";
 interface LabelsItemProps {
   label: string;
-  type: string;
+  type: EntityFormType;
 }
 
 export const LabelsItem = ({ label, type }: LabelsItemProps) => {
