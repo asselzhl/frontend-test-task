@@ -28,9 +28,10 @@ Ensure you have the following installed:
 
 ## Installation Steps
 
-1. <strong>Clone the Repository:</strong> git clone <repository-url> cd <repository-directory>
-2. <strong>Install dependencies:</strong> npm run install
-3. <strong>Start the application:</strong> npm run start
+1. <strong>Clone the Repository:</strong> <code>git clone https://github.com/asselzhl/frontend-test-task.git</code>
+2. <strong>Go the project folder:</strong> <code>cd frontend-test-task</code>
+3. <strong>Install dependencies:</strong> <code>npm run install</code>
+4. <strong>Start the application:</strong> <code>npm run start</code>
 
 The frontend application will be available at http://localhost:5173/.
 
