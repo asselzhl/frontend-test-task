@@ -1,11 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 
-import { AppDispatch } from "../../store/store";
+import { useAppDispatch } from "../../../store/store";
 import {
   removeCreateEntityFormLabel,
   removeEditEntityFormLabel,
-} from "../../store/entityForm/entityForm";
+} from "../../../store/entityForm/entityForm";
 
 const style = {
   listItem: `flex items-center justify-between mb-3 gap-x-2`,
@@ -19,7 +18,7 @@ interface LabelsItemProps {
 }
 
 export const LabelsItem = ({ label, type }: LabelsItemProps) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const handleRemove = () => {
     const action =

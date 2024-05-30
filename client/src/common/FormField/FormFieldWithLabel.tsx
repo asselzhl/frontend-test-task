@@ -9,7 +9,7 @@ const style = {
 interface FormFieldWithLabelProps {
   name: string;
   value: string;
-  onChange;
+  onChange: (e?) => void;
 }
 
 export const FormFieldWithLabel = ({

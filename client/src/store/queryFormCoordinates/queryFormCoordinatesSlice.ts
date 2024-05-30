@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { QueryFormCoordinatesKeys, QueryFormCoordinatesState } from "../types";
 import { queryCoordinates } from "./queryFormCoordinatesThunk";
-import { handlePending, handleRejected } from "../reducersUtils";
+import { handlePending, handleRejected } from "../extraReducersUtils";
 
 const initialState: QueryFormCoordinatesState = {
     coordinates: { x1: '', y1: '', x2: '', y2: '' },

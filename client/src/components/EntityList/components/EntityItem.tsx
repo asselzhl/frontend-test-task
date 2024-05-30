@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { Button } from "../Button/Button";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store/store";
-import { deleteEntity } from "../../store/entity/entityThunk";
-import { EntityForm } from "../EntityForm/EntityForm";
+import { Button } from "../../../common/Button/Button";
+import { useAppDispatch } from "../../../store/store";
+import { deleteEntity } from "../../../store/entity/entityThunk";
+import { EntityForm } from "../../EntityForm/EntityForm";
+import { EntityDetails } from "./EntityDetails";
 
 const style = {
   listItem: `flex items-center justify-between`,
-  buttons: `flex gap-x-5`,
 };
 
 interface EntityItem {
@@ -23,7 +22,7 @@ interface EntityItemProps {
 export const EntityItem = ({ entity }: EntityItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -45,15 +44,11 @@ export const EntityItem = ({ entity }: EntityItemProps) => {
         </>
       ) : (
         <>
-          <div className="flex w-full">
-            <span className="flex-1">{entity.name}</span>
-            <span className="flex-1">{entity.coordinate.join(", ")}</span>
-            <span className="flex-1">{entity.labels.join(", ")}</span>
-          </div>
-          <div className={style.buttons}>
-            <Button text="edit" onClick={handleEdit} />
-            <Button text="delete" onClick={handleDelete} />
-          </div>
+          <EntityDetails
+            entity={entity}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
         </>
       )}
     </li>

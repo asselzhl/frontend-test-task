@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createEntity, deleteEntity, fetchEntities, updateEntity } from "./entityThunk";
-import { handlePending, handleRejected } from "../reducersUtils";
+import { handlePending, handleRejected } from "../extraReducersUtils";
 import { stateStatuses } from "../constants";
 import { EntitiesState } from "../types";
 

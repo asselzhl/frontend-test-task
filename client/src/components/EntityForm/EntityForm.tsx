@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { FormFieldWithLabel } from "../FormField/FormFieldWithLabel";
-import { Button } from "../Button/Button";
+import { FormFieldWithLabel } from "../../common/FormField/FormFieldWithLabel";
+import { Button } from "../../common/Button/Button";
 
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../store/store";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../store/store";
 
 import {
   getCreateEntityFormState,
@@ -15,7 +15,7 @@ import {
   setEditEntityFormData,
   clearCreateEntityFormData,
 } from "../../store/entityForm/entityForm";
-import { EntityFormLabels } from "../EntityFormLabels/EntityFormLabels";
+import { EntityFormLabels } from "./components/EntityFormLabels";
 
 const style = {
   wrapper: `w-full`,
@@ -25,10 +25,17 @@ const style = {
 
 type EntityFormTypes = "edit" | "create";
 
+interface EntityItem {
+  id: string;
+  name: string;
+  coordinate: number[];
+  labels: string[];
+}
+
 interface EntityFormProps {
   type: EntityFormTypes;
-  entity?;
-  setIsEditing?;
+  entity?: EntityItem;
+  setIsEditing?: (isEditing: boolean) => void;
 }
 
 export const EntityForm = ({
@@ -36,7 +43,7 @@ export const EntityForm = ({
   entity = null,
   setIsEditing,
 }: EntityFormProps) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const fields = ["name", "coordinate1", "coordinate2"];
 
   const entityFormState = useSelector(

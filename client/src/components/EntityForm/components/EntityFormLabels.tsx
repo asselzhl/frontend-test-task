@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { FormFieldWithLabel } from "../FormField/FormFieldWithLabel";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "src/store/store";
-import { LabelsItem } from "../LabelsItem/LabelsItem";
+import { FormFieldWithLabel } from "../../../common/FormField/FormFieldWithLabel";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../../store/store";
+import { LabelsItem } from "./LabelsItem";
 import {
   getEditEntityFormLabels,
   getCreateEntityFormLabels,
-} from "../../store/selectors";
+} from "../../../store/selectors";
 import {
   addCreateEntityFormLabel,
   addEditEntityFormLabel,
-} from "../../store/entityForm/entityForm";
+} from "../../../store/entityForm/entityForm";
 
 const style = {
   form: `flex items-end gap-x-2 `,
@@ -18,7 +18,7 @@ const style = {
 };
 
 export const EntityFormLabels = ({ type }) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const [label, setLabel] = useState("");
 
   const entityLabels = useSelector(

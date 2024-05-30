@@ -1,12 +1,9 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "lib": [
-      "ES2021",
-      "dom"
-    ],
+    "lib": ["ES2021", "dom"],
     "baseUrl": ".",
-    "jsx": "react-jsx",
+    "jsx": "react-jsx"
   },
-  "include":["."],
+  "include": ["."]
 }

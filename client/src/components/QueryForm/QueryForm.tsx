@@ -1,6 +1,6 @@
 import React from "react";
-import { FormFieldWithLabel } from "../FormField/FormFieldWithLabel";
-import { Button } from "../Button/Button";
+import { FormFieldWithLabel } from "../../common/FormField/FormFieldWithLabel";
+import { Button } from "../../common/Button/Button";
 import { useSelector } from "react-redux";
 import {
   getQueryFormCoordinates,
@@ -13,9 +13,10 @@ import {
   setCoordinates,
 } from "../../store/queryFormCoordinates/queryFormCoordinatesSlice";
 import { queryCoordinates } from "../../store/queryFormCoordinates/queryFormCoordinatesThunk";
+import { QueryResult } from "./components/QueryResult";
 
 const style = {
-  wrapper: `w-full`,
+  wrapper: `w-full flex flex-col p-20 gap-y-10`,
   title: `text-center mb-7 text-2xl font-bold`,
   form: `flex gap-6 items-start justify-center flex-wrap`,
 };
@@ -41,7 +42,7 @@ export const QueryForm = () => {
   };
 
   return (
-    <div className="flex flex-col p-20 gap-y-20">
+    <div className={style.wrapper}>
       <h2 className={style.title}>Query form</h2>
       <form className={style.form} onSubmit={handleSubmit}>
         {fields.map((field) => {
@@ -57,15 +58,7 @@ export const QueryForm = () => {
         <Button text="query" onClick={() => {}} type="submit" />
       </form>
 
-      <div>
-        <h3 className="font-bold text-xl">Result</h3>
-        <p>
-          Entities: <span>{entityNames.join(", ")}</span>
-        </p>
-        <p>
-          Labels: <span>{entityLabels.join(", ")}</span>
-        </p>
-      </div>
+      <QueryResult entityNames={entityNames} entityLabels={entityLabels} />
     </div>
   );
 };
