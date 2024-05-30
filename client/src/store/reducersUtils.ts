@@ -1,4 +1,5 @@
-import { StateStatus, stateStatuses } from "./constants";
+import { stateStatuses } from "./constants";
+import { StateStatus } from "./types";
 
 export const handlePending = (state: { status: StateStatus }) => {
     state.status = stateStatuses.loading;

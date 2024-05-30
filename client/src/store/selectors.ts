@@ -15,3 +15,10 @@ export const getCreateEntityFormLabels = (state: RootState) => state.entityForm.
 
 export const getEditEntityFormState = (state: RootState) => state.entityForm.editEntityForm;
 export const getEditEntityFormLabels = (state: RootState) => state.entityForm.editEntityForm.labels;
+
+
+// Query Form selectors
+export const getQueryFormCoordinatesState = (state: RootState) => state.queryFormCoordinates;
+export const getQueryFormCoordinates = (state: RootState) => state.queryFormCoordinates.coordinates;
+export const getQueryFormEntityNames = (state: RootState) => state.queryFormCoordinates.entityNames;
+export const getQueryFormEntityLabels = (state: RootState) => state.queryFormCoordinates.entityLabels;

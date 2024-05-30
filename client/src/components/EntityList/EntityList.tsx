@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteEntity, fetchEntities } from "../../store/entity/entityThunk";
+import { fetchEntities } from "../../store/entity/entityThunk";
 import { getEntityList } from "../../store/selectors";
 import { AppDispatch } from "../../store/store";
 import { EntityItem } from "../EntityItem/EntityItem";

@@ -1,20 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createEntity, deleteEntity, fetchEntities, updateEntity } from "./entityThunk";
 import { handlePending, handleRejected } from "../reducersUtils";
-import { StateStatus, stateStatuses } from "../constants";
+import { stateStatuses } from "../constants";
+import { EntitiesState } from "../types";
 
-interface EntitiesItem {
-    id: number;
-    name: string;
-    coordinate: number[];
-    labels: string[];
-}
-
-interface EntitiesState {
-    status: StateStatus;
-    data: EntitiesItem[];
-    error: null | string;
-}
 
 const initialState: EntitiesState = {
     status: stateStatuses.idle,

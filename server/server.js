@@ -56,7 +56,7 @@ app.put("/entities/:id", (req, res) => {
 });
 
 app.delete("/entities/:id", (req, res) => {
-  const entityId = parseInt(req.params.id, 10);
+  const entityId = req.params.id;
   const entityIndex = entities.findIndex((e) => e.id === entityId);
 
   if (entityIndex !== -1) {
@@ -65,4 +65,23 @@ app.delete("/entities/:id", (req, res) => {
   } else {
     res.status(404).json({ message: "Entity not found" });
   }
+});
+
+app.get("/entities/query", (req, res) => {
+  const { x1, y1, x2, y2 } = req.query;
+
+  const minX = Math.min(x1, x2);
+  const maxX = Math.max(x1, x2);
+  const minY = Math.min(y1, y2);
+  const maxY = Math.max(y1, y2);
+
+  const result = entities.filter((entity) => {
+    const [x, y] = entity.coordinate;
+    return x >= minX && x <= maxX && y >= minY && y <= maxY;
+  });
+
+  const labels = [...new Set(result.flatMap((entity) => entity.labels))];
+  const entityNames = result.flatMap((entity) => entity.name);
+
+  res.json({ entities: entityNames, labels });
 });

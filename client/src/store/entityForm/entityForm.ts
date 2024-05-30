@@ -1,13 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { EntityFormKeys, EntityFormValues } from "../types";
 
-
-type EntityFormKeys = 'createEntityForm' | 'editEntityForm';
-interface EntityFormValues {
-    name: string;
-    coordinate1: string;
-    coordinate2: string;
-    labels: string[];
-}
 
 const initialState: Record<EntityFormKeys, EntityFormValues> = {
     createEntityForm: {
@@ -64,7 +57,16 @@ export const entityFormSlice = createSlice({
 
 export const entityFormReducer = entityFormSlice.reducer
 
-export const { setCreateEntityFormData, setEditEntityFormData, clearCreateEntityFormData, clearEditEntityFormData, addCreateEntityFormLabel, addEditEntityFormLabel, removeCreateEntityFormLabel, removeEditEntityFormLabel } = entityFormSlice.actions
+export const {
+    setCreateEntityFormData,
+    setEditEntityFormData,
+    clearCreateEntityFormData,
+    clearEditEntityFormData,
+    addCreateEntityFormLabel,
+    addEditEntityFormLabel,
+    removeCreateEntityFormLabel,
+    removeEditEntityFormLabel
+} = entityFormSlice.actions
 
 
 

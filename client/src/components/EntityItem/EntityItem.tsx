@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "../Button/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { deleteEntity } from "../../store/entity/entityThunk";
 import { EntityForm } from "../EntityForm/EntityForm";
@@ -11,7 +11,7 @@ const style = {
 };
 
 interface EntityItem {
-  id: number;
+  id: string;
   name: string;
   coordinate: number[];
   labels: string[];

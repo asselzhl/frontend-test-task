@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FormFieldWithLabel } from "../FormField/FormFieldWithLabel";
-import { Button } from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "src/store/store";
 import { LabelsItem } from "../LabelsItem/LabelsItem";

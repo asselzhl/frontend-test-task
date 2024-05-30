@@ -14,7 +14,6 @@ import {
   setCreateEntityFormData,
   setEditEntityFormData,
   clearCreateEntityFormData,
-  clearEditEntityFormData,
 } from "../../store/entityForm/entityForm";
 import { EntityFormLabels } from "../EntityFormLabels/EntityFormLabels";
 
@@ -28,7 +27,7 @@ type EntityFormTypes = "edit" | "create";
 
 interface EntityFormProps {
   type: EntityFormTypes;
-  entity;
+  entity?;
   setIsEditing?;
 }
 
@@ -72,6 +71,7 @@ export const EntityForm = ({
 
     if (type === "create") {
       dispatch(createEntity(entityFormData));
+      dispatch(clearCreateEntityFormData());
     } else {
       const updatedEntity = {
         entityFormData: entityFormData,
